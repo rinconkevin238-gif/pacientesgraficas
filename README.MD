@@ -14,3 +14,5 @@ CONCLUSIONES:
    - Campañas de control de colesterol.
    - Prevención dirigida a hombres (grupo más afectado).
 """
+la verdad desde google colab no fui capaz de enviarlo entonces decidi pegarlo aca pero el 
+codigo quedi completamente funcional
