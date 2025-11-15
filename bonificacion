@@ -1,0 +1,57 @@
+player = {
+    "nombre": "Hero",
+    "vida": -5,
+    "vida_max": 100,
+    "energia": 130,
+    "energia_max": 100,
+    "x": 150,
+    "y": -20,
+    "peso": 250,
+    "peso_max": 150
+}
+
+limites_mapa = {
+    "min_x": 0,
+    "max_x": 100,
+    "min_y": 0,
+    "max_y": 100
+}
+
+def revisar_estado(p):
+    problemas = []
+
+    if p["vida"] < 0:
+        problemas.append("vida negativa o probablemente dañada")
+        p["vida"] = 0
+    if p["vida"] > p["vida_max"]:
+        problemas.append("vida al máximo")
+        p["vida"] = p["vida_max"]
+
+    if p["energia"] < 0:
+        problemas.append("energía negativa")
+        p["energia"] = 0
+    if p["energia"] > p["energia_max"]:
+        problemas.append("energía mayor al máximo")
+        p["energia"] = p["energia_max"]
+
+    if not (limites_mapa["min_x"] <= p["x"] <= limites_mapa["max_x"]):
+        problemas.append("posición X fuera del mapa")
+        p["x"] = max(limites_mapa["min_x"], min(p["x"], limites_mapa["max_x"]))
+
+    if not (limites_mapa["min_y"] <= p["y"] <= limites_mapa["max_y"]):
+        problemas.append("posición Y fuera del mapa")
+        p["y"] = max(limites_mapa["min_y"], min(p["y"], limites_mapa["max_y"]))
+
+    if p["peso"] < 0:
+        problemas.append("peso negativo")
+        p["peso"] = 0
+    if p["peso"] > p["peso_max"]:
+        problemas.append("peso excedido")
+        p["peso"] = p["peso_max"]
+
+    return problemas, p
+
+problemas, corregido = revisar_estado(player)
+
+print("Problemas que a detctado el sistema:", problemas)
+print("ultimo estado:", corregido)
